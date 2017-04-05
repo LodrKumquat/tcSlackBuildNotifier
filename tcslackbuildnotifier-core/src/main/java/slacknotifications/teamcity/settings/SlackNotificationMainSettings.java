@@ -101,6 +101,8 @@ public class SlackNotificationMainSettings implements MainConfigProcessor {
         return this.slackNotificationMainConfig.getContent().getBotName();
     }
 
+    public String getTemplateBody() { return  this.slackNotificationMainConfig.getContent().getTemplateBody(); }
+
     public boolean getEnabled(){
         return this.slackNotificationMainConfig.getEnabled();
     }

@@ -40,6 +40,10 @@ public interface SlackNotification {
 
     public abstract void setBotName(String botName);
 
+	String getTemplateBody();
+
+	void setTemplateBody(String templateBody);
+
     public abstract String getIconUrl();
 
     public abstract void setIconUrl(String iconUrl);

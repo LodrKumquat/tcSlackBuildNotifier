@@ -241,6 +241,14 @@
                                                     <input type="text" name="iconUrl" id="iconUrl" />
                                                 </td>
                                             </tr>
+                                           <tr class="onCustomContentEnabled">
+                                               <td>
+                                                   <label for="templateBody">Message body: </label>
+                                               </td>
+                                               <td colspan="2">
+                                                   <textarea rows="3" cols="50" name="templateBody" id="templateBody"></textarea>
+                                               </td>
+                                          </tr>
                                         </table>
 
                                 </div>

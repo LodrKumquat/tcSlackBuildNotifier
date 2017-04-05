@@ -40,6 +40,7 @@ public class SlackNotificationAjaxEditPageController extends BaseController {
 	    private static final String SLACK_NOTIFICATION_ID = "slackNotificationId";
 	    private static final String MAX_COMMITS_DISPLAY = "maxCommitsToDisplay";
 	    private static final String BOT_NAME = "botName";
+	    private static final String TEMPLATE_BODY = "templateBody";
 	    private static final String ICON_URL = "iconUrl";
 	    private static final String FALSE = "false";
 		protected static final String BEFORE_FINISHED = "BeforeFinished";
@@ -180,6 +181,11 @@ public class SlackNotificationAjaxEditPageController extends BaseController {
                                                     && (request.getParameter(BOT_NAME).length() > 0)){
                                                 content.setBotName(request.getParameter(BOT_NAME));
                                             }
+
+											if ((request.getParameter(TEMPLATE_BODY) != null)
+													&& (request.getParameter(TEMPLATE_BODY).length() > 0)) {
+												content.setTemplateBody(request.getParameter(TEMPLATE_BODY));
+											}
 
                                             if ((request.getParameter(ICON_URL) != null )
                                                     && (request.getParameter(ICON_URL).length() > 0)){

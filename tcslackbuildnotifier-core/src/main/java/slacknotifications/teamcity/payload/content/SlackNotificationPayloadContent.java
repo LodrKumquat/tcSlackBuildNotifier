@@ -10,10 +10,7 @@ import slacknotifications.teamcity.Loggers;
 import slacknotifications.teamcity.SlackNotificator;
 import slacknotifications.teamcity.TeamCityIdResolver;
 
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.HashSet;
-import java.util.List;
+import java.util.*;
 
 public class SlackNotificationPayloadContent {
     String buildStatus;

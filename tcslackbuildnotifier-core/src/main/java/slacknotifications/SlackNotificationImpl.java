@@ -25,15 +25,9 @@ import slacknotifications.teamcity.payload.content.PostMessageResponse;
 import slacknotifications.teamcity.payload.content.SlackNotificationPayloadContent;
 import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.IOException;
+import java.io.*;
 import java.net.URLEncoder;
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 import java.util.concurrent.TimeUnit;
 
 
@@ -71,6 +65,7 @@ public class SlackNotificationImpl implements SlackNotification {
     private boolean mentionChannelEnabled;
     private boolean mentionSlackUserEnabled;
     private boolean showFailureReason;
+    private String templateBody;
 	
 /*	This is a bit mask of states that should trigger a SlackNotification.
  *  All ones (11111111) means that all states will trigger the slacknotifications
@@ -360,9 +355,33 @@ public class SlackNotificationImpl implements SlackNotification {
             }
             attachment.addField("", mentionContent, true);
         }
-
+        addCustomMessage(attachment);
         attachments.add(attachment);
         return attachments;
+    }
+
+    private void addCustomMessage(Attachment attachment) {
+        try {
+            if (templateBody != null && templateBody.length() > 0) {
+                String[] messages = templateBody.split("\n##");
+                messages[0] = messages[0].substring(2);
+                for (String s : messages) {
+                    int indexOfDivision = s.indexOf('\n');
+                    String fieldTitle = s.substring(0, indexOfDivision).replace("\\t", "\t").replace("\\n", "\n");
+                    String[] fieldValueParts = s.substring(indexOfDivision + 1).replace("\\t", "\t").replace("\\n", "\n").split("%");
+                    StringBuilder fieldValue = new StringBuilder();
+                    for (int i = 0; i < fieldValueParts.length; i++) {
+                        if (i % 2 == 0)
+                            fieldValue.append(fieldValueParts[i]);
+                        else
+                            fieldValue.append(System.getenv(fieldValueParts[i]));
+                    }
+                    attachment.addField(fieldTitle, fieldValue.toString(), false);
+                }
+            }
+        } catch (Throwable e) {
+            Loggers.SERVER.error(e.getMessage(), e);
+        }
     }
 
     private class WebHookPayload {
@@ -473,6 +492,10 @@ public class SlackNotificationImpl implements SlackNotification {
     public void setBotName(String botName) {
         this.botName = botName;
     }
+
+    public String getTemplateBody() { return templateBody; }
+
+    public  void setTemplateBody(String templateBody) { this.templateBody = templateBody; }
 
     public String getChannel() {
         return channel;

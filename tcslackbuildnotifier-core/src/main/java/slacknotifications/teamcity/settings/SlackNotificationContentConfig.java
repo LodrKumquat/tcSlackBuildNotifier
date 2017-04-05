@@ -12,6 +12,7 @@ public class SlackNotificationContentConfig {
     public static final boolean DEFAULT_SHOW_FAILURE_REASON = false;
     private String iconUrl = SlackNotificationMainConfig.DEFAULT_ICONURL;
     private String botName = SlackNotificationMainConfig.DEFAULT_BOTNAME;
+    private String templateBody = "";
     private Boolean showBuildAgent;
     private Boolean showElapsedBuildTime;
     private Boolean showCommits = true;
@@ -35,6 +36,10 @@ public class SlackNotificationContentConfig {
     public void setBotName(String botName) {
         this.botName = botName;
     }
+
+    public String getTemplateBody() { return templateBody; }
+
+    public  void setTemplateBody(String templateBody) { this.templateBody = templateBody; }
 
     public Boolean getShowBuildAgent() {
         return showBuildAgent;

@@ -145,6 +145,7 @@
 					jQuerySlacknotification('#showCommitters').attr('checked', slacknotification.showCommitters);
 					jQuerySlacknotification('#showElapsedBuildTime').attr('checked', slacknotification.showElapsedBuildTime);
 					jQuerySlacknotification('#botName').val(slacknotification.botName);
+					jQuerySlacknotification('#templateBody').val(slacknotification.templateBody);
 					jQuerySlacknotification('#iconUrl').val(slacknotification.iconUrl)
 					jQuerySlacknotification('#showFailureReason').attr('checked', slacknotification.showFailureReason);
 				}
