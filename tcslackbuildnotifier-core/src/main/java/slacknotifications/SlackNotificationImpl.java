@@ -367,7 +367,7 @@ public class SlackNotificationImpl implements SlackNotification {
                 messages[0] = messages[0].substring(2);
                 for (String s : messages) {
                     int indexOfDivision = s.indexOf('\n');
-                    String fieldTitle = s.substring(0, indexOfDivision).replace("\\t", "\t").replace("\\n", "\n");
+                    String fieldTitle = s.substring(0, indexOfDivision);
                     String[] fieldValueParts = s.substring(indexOfDivision + 1).replace("\\t", "\t").replace("\\n", "\n").split("%");
                     StringBuilder fieldValue = new StringBuilder();
                     for (int i = 0; i < fieldValueParts.length; i++) {
